@@ -1,0 +1,15 @@
+time=2015-03-19
+version=2.3
+1.新增ZipUtil
+
+time=2015-03-18
+version=2.3
+1.新增高仿微信选择图片控件 SelectPhotoView
+2.新增按照大小等比压缩图片的方法
+3.SDUtils类新增若干方法
+
+time=2015-02-14
+version=2.2
+
+time=2015-02-06
+version=2.1
