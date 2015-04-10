@@ -7,6 +7,7 @@ import java.util.TimerTask;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -168,6 +169,20 @@ public class ActivityUtils {
 			installed = false;
 		}
 		return installed;
+	}
+	
+	/**
+	 * 获取未安装apk的版本号
+	 * @param c
+	 * @param archiveFilePath
+	 * @return
+	 */
+	public static int getUninstallAPKVersionCode(Context c, String archiveFilePath) {
+		PackageManager pm = c.getPackageManager();
+		PackageInfo pakinfo = pm.getPackageArchiveInfo(archiveFilePath, PackageManager.GET_ACTIVITIES);
+		if (pakinfo != null)
+			return pakinfo.versionCode;
+		return 0;
 	}
 
 	private static boolean isExit = false;
