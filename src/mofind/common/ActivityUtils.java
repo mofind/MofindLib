@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -170,9 +171,10 @@ public class ActivityUtils {
 		}
 		return installed;
 	}
-	
+
 	/**
 	 * 获取未安装apk的版本号
+	 * 
 	 * @param c
 	 * @param archiveFilePath
 	 * @return
@@ -183,6 +185,28 @@ public class ActivityUtils {
 		if (pakinfo != null)
 			return pakinfo.versionCode;
 		return 0;
+	}
+
+	/**
+	 * 获取已安装apk的版本号
+	 * 
+	 * @param c
+	 * @param pak
+	 * @return
+	 */
+	public static int getInstallAPKVersionCode(Context c, String pak) {
+		int versionCode = 0;
+		PackageManager pm = c.getPackageManager();
+		PackageInfo pakinfo;
+		try {
+			pakinfo = pm.getPackageInfo(pak, PackageManager.GET_ACTIVITIES);
+			if (pakinfo != null) {
+				versionCode = pakinfo.versionCode;
+			}
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		return versionCode;
 	}
 
 	private static boolean isExit = false;
